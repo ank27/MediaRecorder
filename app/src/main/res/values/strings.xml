@@ -1,0 +1,66 @@
+<resources>
+    <string name="app_name">PulseEmotionAdrenaline</string>
+
+    <string name="not_found">Sorry, AffdexMe requires the use of a front-facing camera, which was not found on your device.</string>
+    <string name="affectiva_logo_content_description">Affectiva Logo</string>
+    <string name="fps">FPS:</string>
+    <string name="loading">Loading&#8230;</string>
+    <string name="settings_content_description">Settings</string>
+
+    <string name="insufficient_permissions">Insufficient Permissions</string>
+    <string name="permissions_camera_needed_explanation">This app requires the permission to access your camera to be able to gather facial images for processing. No video is saved or used other than for immediate emotion processing.</string>
+    <string name="permissions_storage_needed_explanation">This app requires the permission to access your external storage to save screenshots.</string>
+    <string name="error">Error</string>
+    <string name="understood">Understood</string>
+    <string name="retry">Retry</string>
+
+    <!--MetricSelectionFragment strings-->
+    <string name="clear_all">Clear All</string>
+    <string name="metric_chooser_default_message">0 metrics chosen.</string>
+    <string name="choose_six_message">Choose 6 emotions and expressions below to display on the main screen.</string>
+
+    <!--SettingsActivity strings-->
+    <string name="select_metrics_title">Select Metrics</string>
+    <string name="select_metrics_message">Select emotions and expressions to display.</string>
+    <string name="settings_title">Settings</string>
+    <string name="settings_message">Change application settings.</string>
+
+    <!--SettingsFragment strings-->
+    <string name="set_fps_title">Set Target FPS</string>
+    <string name="set_fps_message">Set the desired processed frames per second.</string>
+    <string name="fps_edittext_title">Processed Frames Per Second</string>
+    <string name="show_tracking_title">Show Tracking Dots</string>
+    <string name="show_tracking_message">Display tracking dots and bounding box.</string>
+    <string name="show_appearance_title">Show Appearance Indicators</string>
+    <string name="show_appearance_message">Display appearance markers adjacent to the bounding box.</string>
+    <string name="show_fps_title">Show FPS</string>
+    <string name="show_fps_message">Display the actual processed frames per second.</string>
+    <string name="show_emoji_title">Show Emoji Indicators</string>
+    <string name="show_emoji_message">Display emoji markers adjacent to the bounding box.</string>
+    <string name="show_multiface_message">Track multiple people. A beta feature that is CPU intensive, and works only on newer devices.</string>
+    <string name="show_multiface_title">Enable Multi-face mode</string>
+    <string name="negative">NEGATIVE</string>
+    <string name="positive">POSITIVE</string>
+
+    <string name="subscription_key">6b55bbe7598a48fd8738b22f5a2e52d6</string>
+
+    <!-- Face subscription key -->
+    <!-- Please refer to http://oxford-portal.azurewebsites.net/doc/general/subscription-key-mgmt to get your subscription key -->
+    <!-- Please note that the Emotion API and Face API have different subscription keys -->
+    <!-- You will need Face subscription key, besides the Emotion subscription keys, for the second part of the sample to work -->
+    <string name="faceSubscription_key">d876dc3acc514c7cb650d8b76bacc434</string>
+
+    <!-- Display strings -->
+    <string name="add_subscription_key_tip_title">Subscription Key is Needed</string>
+    <string name="add_subscription_key_tip">Please put your two subscription keys for Emotion API/Face API to source file \"app/res/values/strings.xml\" to enable Emotion API and Face API calls.</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_analyze">AnalyzeActivity</string>
+    <string name="title_activity_recognize">RecognizeActivity</string>
+    <string name="title_activity_thumbnail">ThumbnailActivity</string>
+
+    <!-- Select image activity -->
+    <string name="select_an_image">Select an Image</string>
+    <string name="take_photo">Take a Photo</string>
+    <string name="select_image_in_album">From Gallery</string>
+
+</resources>
