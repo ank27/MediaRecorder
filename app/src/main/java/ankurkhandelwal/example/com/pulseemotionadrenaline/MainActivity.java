@@ -81,26 +81,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
         initilizeUI();
         determineCameraAvailability();
         checkPermissions();
-        //check default url
-//        checkUrl();
-    }
-
-    private void checkUrl(){
-        Log.d(TAG,"url = "+Constants.BASE_URL);
-
-//        VideoInterface vInterface = APIClient.getClient().create(VideoInterface.class);
-//        Call<ResponseBody> serverResponse = vInterface.checkServerResponse();
-//        serverResponse.enqueue(new Callback<ResponseBody>() {
-//            @Override public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-//                ResponseBody body = response.body();
-//                Log.d(TAG,"Response body ="+body.toString());
-//            }
-//
-//            @Override public void onFailure(Call<ResponseBody> call, Throwable t) {
-//                Log.d(TAG, "Error message " + t.getMessage());
-//                //empty external folder
-//            }
-//        });
     }
 
     private void startCameraService() {
@@ -158,7 +138,7 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
     }
 
     private void startTimer() {
-        timer = new CountDownTimer(15000, 1000) {
+        timer = new CountDownTimer(10000, 1000) {
             @Override public void onTick(long millisUntilFinished) {
 
             }
@@ -170,6 +150,17 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
             }
         };
         timer.start();
+    }
+
+    private File getSavedExternalFolder(){
+        File pictureFolder = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_MOVIES), "Emotion");
+        if (!pictureFolder.exists()) {
+            if (!pictureFolder.mkdir()) {
+                Log.e(TAG, "Unable to create directory: " + pictureFolder.getAbsolutePath());
+                return null;
+            }
+        }
+        return pictureFolder;
     }
 
     private void getExternalFilesAndSendData() {
@@ -289,69 +280,6 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
 
     }
 
-//    private class EmotionApiTask extends AsyncTask<Void, Void, JSONObject> {
-//
-//        String userId;
-//        String timeStamp;
-//        ArrayList<File> files;
-//        EmotionApiTask(String userId,String timeStamp, ArrayList<File> files){
-//            this.userId = userId;
-//            this.timeStamp = timeStamp;
-//            this.files = files;
-//        }
-//
-//
-//        @Override
-//        protected void onPreExecute() {
-//            Log.d(TAG, "executing EmotionApiTask");
-//        }
-//
-//
-//        @Override protected JSONObject doInBackground(Void... voids) {
-//            try {
-//                String urlString = "http://127.0.0.1:8000/process_video/";
-//                URL url = new URL(urlString);
-//                Log.d(TAG, url.toString());
-//                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-//                urlConnection.setRequestMethod("POST");
-//                urlConnection.setRequestProperty("Content-Type", "application/json");
-//                urlConnection.setRequestProperty("charset", "utf-8");
-//
-//
-//                if (urlConnection.getResponseCode() == 401) {
-//                    JSONObject jsonObject = new JSONObject();
-//                    jsonObject.put("success", false);
-//                    return jsonObject;
-//                } else {
-//                    BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
-//                    StringBuilder response = new StringBuilder();
-//                    String line = null;
-//                    while ((line = bufferedReader.readLine()) != null) {
-//                        response.append(line);
-//                    }
-//                    return new JSONObject(response.toString());
-//                }
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            } catch (JSONException e1) {
-//                e1.printStackTrace();
-//            }
-//            return null;
-//        }
-//
-//        @Override
-//        protected void onPostExecute(JSONObject json) {
-//            try {
-//                Log.d(TAG, "send emotionData to server success");
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            } finally {
-//                super.onPostExecute(json);
-//            }
-//        }
-//    }
-
-
     @Override
     public void onResume() {
         super.onResume();
@@ -365,9 +293,28 @@ public class MainActivity extends AppCompatActivity implements SurfaceHolder.Cal
                 Log.d(TAG,"isServiceStop = "+intent.getBooleanExtra("isServiceStopped",true));
                 //send data to server
                 getExternalFilesAndSendData();
+
+
+                //send video to affdex class and get the result from emotion
+                startEmotionProcess();
+
+                //start camera service again
+//                startServiceAndTimer();
             }
         }
     };
+
+    private void startEmotionProcess() {
+        Log.d(TAG,"==== START EMOTION PROCESS ====");
+        File emotionFolder = getSavedExternalFolder();
+        ArrayList<File> files = getListFiles(emotionFolder);
+        Log.d(TAG,"files count in emotion folder = "+files);
+        String filePath = files.get(0).getAbsolutePath();
+        Log.d(TAG,"filePath = "+filePath);
+//        AffDexVideoProcess process = new AffDexVideoProcess();
+//        process.init(this);
+//        process.startVideoProcess(filePath);
+    }
 
     @Override
     protected void onPause() {

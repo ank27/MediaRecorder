@@ -26,6 +26,13 @@ android {
             path "CMakeLists.txt"
         }
     }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['jniLibs']
+            jni.srcDirs = [] //disable automatic ndk-build
+        }
+    }
 }
 
 dependencies {
@@ -37,6 +44,8 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 
     compile 'com.android.support:design:26.1.0'
+
+    implementation 'com.affectiva.android:affdexsdk:3.2'
 
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
     compile 'com.squareup.okhttp3:okhttp:3.8.0'

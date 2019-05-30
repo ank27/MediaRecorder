@@ -43,7 +43,7 @@ public class CameraService extends Service {
         mServiceCamera = Camera.open(1);
 
         mSurfaceView = MainActivity.mSurfaceView;
-        mSurfaceHolder = MainActivity.mSurfaceHolder;
+        mSurfaceHolder = mSurfaceView.getHolder();
 
         super.onCreate();
         if (!mRecordingStatus)
@@ -87,6 +87,7 @@ public class CameraService extends Service {
         cameraParameter.setPreviewSize(previewSize.width, previewSize.height);
         mServiceCamera.setParameters(cameraParameter);
         mServiceCamera.setDisplayOrientation(90);
+
         try {
             mServiceCamera.setPreviewDisplay(mSurfaceHolder);
             mServiceCamera.startPreview();

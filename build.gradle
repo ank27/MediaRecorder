@@ -17,6 +17,9 @@ buildscript {
 
 allprojects {
     repositories {
+        maven {
+            url "http://maven.affectiva.com"
+        }
         google()
         jcenter()
     }
